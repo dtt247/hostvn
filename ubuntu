@@ -12,7 +12,7 @@
 ######################################################################
 
 OS_VER=$(grep -w "VERSION_ID=" "/etc/os-release" | cut -f2 -d'=' | cut -f2 -d'"')
-LIST_OS_VER_SUPPORT=('18.04' '20.04' '22.04' '24.04')
+LIST_OS_VER_SUPPORT=('20.04' '22.04' '24.04')
 rm -rf ubuntu
 
 DIR=$(pwd)
@@ -90,23 +90,6 @@ set_dns_server(){
 }
 
 create_source_list(){
-    if [ "${OS_VER}" == "18.04" ]; then
-        mv /etc/apt/sources.list /etc/apt/sources.list."$(date +%Y-%m-%d)"
-        cat >> "/etc/apt/sources.list" << EOsource_list
-deb http://archive.ubuntu.com/ubuntu/ bionic main restricted
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted
-deb http://archive.ubuntu.com/ubuntu/ bionic universe
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe
-deb http://archive.ubuntu.com/ubuntu/ bionic multiverse
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates multiverse
-deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
-deb http://security.ubuntu.com/ubuntu bionic-security main restricted
-deb http://security.ubuntu.com/ubuntu bionic-security universe
-deb http://security.ubuntu.com/ubuntu bionic-security multiverse
-EOsource_list
-
-        apt update -y
-    fi
     if [ "${OS_VER}" == "20.04" ]; then
         mv /etc/apt/sources.list /etc/apt/sources.list."$(date +%Y-%m-%d)"
         cat >> "/etc/apt/sources.list" << EOsource_list
@@ -246,7 +229,7 @@ if [[ " ${LIST_OS_VER_SUPPORT[*]} " == *" ${OS_VER} "* ]]; then
 else
     clear
     printf "${RED}%s${NC}" "Ban dang su dung phien ban ${OS} ${OS_VER}."
-    printf "${RED}%s${NC}" "Hien tai Scripts chi ho tro Ubuntu 18.04, 20.04, 22.04, 24.04 va Debian 10."
+    printf "${RED}%s${NC}" "Hien tai Scripts chi ho tro Ubuntu 20.04, 22.04, 24.04."
     printf "${RED}%s${NC}" "Huy cai dat."
     exit
 fi
