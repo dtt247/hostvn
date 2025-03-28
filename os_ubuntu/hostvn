@@ -303,7 +303,7 @@ install_nginx(){
     # wget -O- "${psol_url}" | tar -xz
 
 	cd_dir "${MODULE_PATH}"
-    wget -O- http://nginx.org/download/nginx-"${NGINX_VERSION}".tar.gz | tar -xz
+    wget -O- https://nginx.org/download/nginx-"${NGINX_VERSION}".tar.gz | tar -xz
 	wget -O- https://github.com/FRiCKLE/ngx_cache_purge/archive/refs/tags/"${ngx_cache_purge_version}".tar.gz | tar -xz
 	wget -O- https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_"${openssl_version}".tar.gz | tar -xz
 	wget -O- https://github.com/PCRE2Project/pcre2/releases/download/pcre2-"${pcre_version}"/pcre2-"${pcre_version}".tar.gz | tar -xz
