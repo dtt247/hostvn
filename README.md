@@ -8,14 +8,14 @@
 
 ########################################################################################
 
-Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (20.04, 22.04, 24.04), Debian 10.
+Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (20.04, 22.04, 24.04).
 
 <b>Vui lòng không sao chép, phát hành lại với mục đích thương mại, donate. Xin cảm ơn.</b>
 
 ## 1. Yêu cầu
 
 - VPS tối thiểu 512MB ram và chưa cài đặt bất kỳ dịch vụ nào.
-- Ubuntu 20.04, 22.04, 24.04, Debian 10.
+- Ubuntu 20.04, 22.04, 24.04.
 
 ## 2. Cách cài đặt
 
