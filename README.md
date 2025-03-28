@@ -12,13 +12,18 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 
 <b>Vui lòng không sao chép, phát hành lại với mục đích thương mại, donate. Xin cảm ơn.</b>
 
-## 1. Cách cài đặt
+## 1. Yêu cầu
+
+- VPS tối thiểu 512MB ram và chưa cài đặt bất kỳ dịch vụ nào.
+- Ubuntu 20.04, 22.04, 24.04, Debian 10.
+
+## 2. Cách cài đặt
 
 `curl -sO https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/install && chmod +x install && ./install`
 
-## 2. Chi tiết Script:
+## 3. Chi tiết Script:
 
-### 2.1. Cài đặt
+### 3.1. Cài đặt
 
 - Cập nhật liên tục, cung cấp Menu giúp dễ dàng thao tác, tự động cài đặt.
 - Cài đặt các phần mềm với phiên bản mới nhất từ chính trang chủ.
@@ -38,7 +43,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Cài đặt: ClamAV, ImunifyAV.
 - KHÔNG THU THẬP BẤT KỲ THÔNG TIN GÌ TRÊN VPS CỦA BẠN.
 
-### 2.2. Tối ưu
+### 3.2. Tối ưu
 
 - Cấu hình tối ưu MySQL, Nginx, PHP, Opcache, Memcached, Redis phù hợp theo thông số của VPS.
 - Cấu hình Brotli Compress.
@@ -52,7 +57,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Cronjob tự động cập nhật dải IP mới nhất của Cloudflare cho Nginx và CSF Firewall.
 - And More ...
 
-### 2.3. Bảo mật
+### 3.3. Bảo mật
 
 - Cấu hình tăng cường bảo mật từ tầng webserver.
 - Cấu hình website chạy với user khác nhau hạn chế lây lan mã độc giữa các website.
@@ -69,7 +74,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Scan Malware với Clamav, ImunifyAV.
 - And More ...
 
-### 2.4. Quản lý WordPress
+### 3.4. Quản lý WordPress
 
 - Kiểm tra phiên bản WordPress đang sử dụng.
 - Cập nhật WordPress.
@@ -92,17 +97,12 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Random database prefix khi sử dụng chức năng cài đặt tự động.
 - And more ...
 
-### 2.5. Sao lưu/Khôi phục dữ liệu
+### 3.5. Sao lưu/Khôi phục dữ liệu
 - Backup và restore dữ liệu từ Google Drive với Rclone.
 - Backup, restore tại Local.
 - Thiết lập số bản backup lưu trữ.
 - Quản lý các bản sao lưu.
 - Cho phép kết nối nhiều tài khoản Google Drive.
-
-## 3. Yêu cầu
-
-- VPS tối thiểu 512MB ram và chưa cài đặt bất kỳ dịch vụ nào.
-- Ubuntu 20.04, 22.04, 24.04, Debian 10.
 
 ## 4. Các tính năng sẽ phát triển
 
