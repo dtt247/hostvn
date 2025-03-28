@@ -1,4 +1,4 @@
-<p align="center"><strong>Auto Install & Optimize LEMP Stack on Ubuntu (18.04, 20.04)</strong></p>
+<p align="center"><strong>Auto Install & Optimize LEMP Stack on Ubuntu (20.04, 22.04, 24.04)</strong></p>
 <p align="center"><strong>Author: Sanvv - HOSTVN.NET Technical</strong></p>
 <p align="center"><strong>Home Page: <a href="https://hostvn.vn/">Hostvn Scripts Home page</a> , <a href="https://hostvn.net">Hostvn.net - Tên miền, Web Hosting, Email, VPS &amp; Dịch vụ lưu trữ Website</a></strong></p>
 <p align="center"><strong>Document: https://help.hostvn.vn/</strong></p>
@@ -8,13 +8,17 @@
 
 ########################################################################################
 
-Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (18.04, 20.04), Debian 10.
+Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (20.04, 22.04, 24.04), Debian 10.
 
 <b>Vui lòng không sao chép, phát hành lại với mục đích thương mại, donate. Xin cảm ơn.</b>
 
-## 1. Chi tiết Script:
+## 1. Cách cài đặt
 
-### 1.1. Cài đặt
+`curl -sO https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/install && chmod +x install && ./install`
+
+## 2. Chi tiết Script:
+
+### 2.1. Cài đặt
 
 - Cập nhật liên tục, cung cấp Menu giúp dễ dàng thao tác, tự động cài đặt.
 - Cài đặt các phần mềm với phiên bản mới nhất từ chính trang chủ.
@@ -34,7 +38,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Cài đặt: ClamAV, ImunifyAV.
 - KHÔNG THU THẬP BẤT KỲ THÔNG TIN GÌ TRÊN VPS CỦA BẠN.
 
-### 1.2. Tối ưu
+### 2.2. Tối ưu
 
 - Cấu hình tối ưu MySQL, Nginx, PHP, Opcache, Memcached, Redis phù hợp theo thông số của VPS.
 - Cấu hình Brotli Compress.
@@ -48,7 +52,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Cronjob tự động cập nhật dải IP mới nhất của Cloudflare cho Nginx và CSF Firewall.
 - And More ...
 
-### 1.3. Bảo mật
+### 2.3. Bảo mật
 
 - Cấu hình tăng cường bảo mật từ tầng webserver.
 - Cấu hình website chạy với user khác nhau hạn chế lây lan mã độc giữa các website.
@@ -65,7 +69,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Scan Malware với Clamav, ImunifyAV.
 - And More ...
 
-### 1.4. Quản lý WordPress
+### 2.4. Quản lý WordPress
 
 - Kiểm tra phiên bản WordPress đang sử dụng.
 - Cập nhật WordPress.
@@ -88,21 +92,17 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 - Random database prefix khi sử dụng chức năng cài đặt tự động.
 - And more ...
 
-### 1.5. Sao lưu/Khôi phục dữ liệu
+### 2.5. Sao lưu/Khôi phục dữ liệu
 - Backup và restore dữ liệu từ Google Drive với Rclone.
 - Backup, restore tại Local.
 - Thiết lập số bản backup lưu trữ.
 - Quản lý các bản sao lưu.
 - Cho phép kết nối nhiều tài khoản Google Drive.
 
-## 2. Yêu cầu
+## 3. Yêu cầu
 
 - VPS tối thiểu 512MB ram và chưa cài đặt bất kỳ dịch vụ nào.
-- Ubuntu 18.04, 20.04, Debian 10.
-
-## 3. Cách cài đặt
-
-`curl -sO https://scripts.hostvn.net/install && chmod +x install && ./install`
+- Ubuntu 20.04, 22.04, 24.04, Debian 10.
 
 ## 4. Các tính năng sẽ phát triển
 
