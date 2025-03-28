@@ -27,7 +27,7 @@ DIR=$(pwd)
 BASH_DIR="/var/hostvn"
 GITHUB_RAW_LINK="https://raw.githubusercontent.com"
 EXT_LINK="https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master"
-UPDATE_LINK="${EXT_LINK}/os_ubuntu/update"
+UPDATE_LINK="${EXT_LINK}/ubuntu/update"
 FILE_INFO="${BASH_DIR}/.hostvn.conf"
 HOSTNAME=$(hostname)
 PHP2_RELEASE="no"
@@ -40,7 +40,7 @@ AUTHOR_CONTACT="https://www.facebook.com/groups/hostvn.vn"
 PHPMYADMIN_VERSION=$(curl -s ${UPDATE_LINK}/version | grep "phpmyadmin_version=" | cut -f2 -d'=')
 MARIADB_VERSION=$(curl -s ${UPDATE_LINK}/version | grep "mariadb_version=" | cut -f2 -d'=')
 # shellcheck disable=SC2207
-PHP_LIST=($(curl -s https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/os_ubuntu/update/version | grep "php_list=" | cut -f2 -d'='))
+PHP_LIST=($(curl -s https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/ubuntu/update/version | grep "php_list=" | cut -f2 -d'='))
 
 # Set Lang
 OPTION_CHANGE_SSH="Ban co muon thay doi port SSH khong ? "
@@ -278,7 +278,7 @@ check_duplicate_php() {
 install_nginx(){
     apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev libbrotli-dev -y
     apt autoremove -y
-    UPDATE_LINK="https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/os_ubuntu/update"
+    UPDATE_LINK="https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/ubuntu/update"
     MODULE_PATH="/usr/share/nginx_module"
     mkdir -p "${MODULE_PATH}"
     NGINX_VERSION=$(curl -s ${UPDATE_LINK}/version | grep "nginx_version=" | cut -f2 -d'=')
@@ -963,7 +963,7 @@ mariadb_calculation() {
 install_optipng(){
     optipng_version=$(curl -s ${UPDATE_LINK}/version | grep "optipng_version=" | cut -f2 -d'=')
     cd_dir /opt
-	wget -O- https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/os_ubuntu/modules/optipng-"${optipng_version}".tar.gz | tar -xz
+	wget -O- https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/ubuntu/modules/optipng-"${optipng_version}".tar.gz | tar -xz
     cd_dir optipng-"${optipng_version}"
     ./configure
     make
@@ -3189,7 +3189,7 @@ END
 add_menu() {
     cd_dir "${BASH_DIR}"
     rm -rf menu hostvn.conf ipaddress menu.tar.gz /usr/bin/hostvn
-    wget "${EXT_LINK}"/os_ubuntu/menu.tar.gz  > /dev/null
+    wget "${EXT_LINK}"/ubuntu/menu.tar.gz  > /dev/null
     tar -xvf menu.tar.gz && rm -rf menu.tar.gz  > /dev/null
     mkdir -p "${BASH_DIR}"/users
     mkdir -p /var/log/hostvn
