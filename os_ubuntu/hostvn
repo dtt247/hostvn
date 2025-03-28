@@ -1005,7 +1005,7 @@ self_signed_ssl() {
     openssl dhparam -out /etc/nginx/ssl/dhparams.pem 2048
     openssl genrsa -out "${self_signed_dir}/server.key" 4096
     openssl req -new -key "${self_signed_dir}/server.key" \
-        -out "${self_signed_dir}/server.csr" -subj "/C=VN/ST=Caugiay/L=Hanoi/O=HangMU/OU=IT Department/CN=${IPADDRESS}"
+        -out "${self_signed_dir}/server.csr" -subj "/C=VN/ST=Caugiay/L=Hanoi/O=Hostvn/OU=IT Department/CN=${IPADDRESS}"
     openssl x509 -in "${self_signed_dir}/server.csr" -out "${self_signed_dir}/server.crt" \
         -req -signkey "${self_signed_dir}/server.key" -days 3650
 }
