@@ -491,69 +491,48 @@ install_php_2() {
 }
 
 install_phpmyadmin() {
-    if [ "${PHP_VERSION}" == "5.6" ]; then
-        PHPMYADMIN_VERSION=$(curl -s ${UPDATE_LINK}/version | grep "phpmyadmin4_version=" | cut -f2 -d'=')
-    fi
+    apt-get install unzip wget -y
 
-    if [ "${PHP_VERSION}" != "5.6" ]; then
-        DECLARE="declare(strict_types=1);"
-    fi
-    if [ -f "${DEFAULT_DIR_TOOL}" ]; then
-        rm -rf "${DEFAULT_DIR_TOOL}"
-    fi
-    if [ ! -d "${DEFAULT_DIR_TOOL}" ]; then
-        mkdir -p "${DEFAULT_DIR_TOOL}"
-    fi
+    # Tải và giải nén phpMyAdmin
     cd_dir "${DEFAULT_DIR_TOOL}"
-
-	wget -O- https://files.phpmyadmin.net/phpMyAdmin/"${PHPMYADMIN_VERSION}"/phpMyAdmin-"${PHPMYADMIN_VERSION}"-all-languages.tar.gz | tar -xz
-
+    wget -O- https://files.phpmyadmin.net/phpMyAdmin/"${PHPMYADMIN_VERSION}"/phpMyAdmin-"${PHPMYADMIN_VERSION}"-all-languages.tar.gz | tar -xz
     mv phpMyAdmin-"${PHPMYADMIN_VERSION}"-all-languages phpmyadmin
     rm -rf phpMyAdmin-"${PHPMYADMIN_VERSION}"-all-languages.zip
     rm -rf "${DEFAULT_DIR_TOOL}"/phpmyadmin/setup
 
-    mv "${DEFAULT_DIR_TOOL}"/phpmyadmin/config.sample.inc.php "${DEFAULT_DIR_TOOL}"/phpmyadmin/config.inc.php
-
-    BLOWFISH_SECRET=$(random_string 64)
+    # Tạo thư mục tạm
     mkdir -p "${DEFAULT_DIR_TOOL}"/phpmyadmin/tmp
-
-    cat >"${DEFAULT_DIR_TOOL}/phpmyadmin/config.inc.php" <<EOCONFIGINC
-<?php
-${DECLARE}
-\$cfg['blowfish_secret'] = '${BLOWFISH_SECRET}';
-\$i = 0;
-\$i++;
-\$cfg['Servers'][\$i]['auth_type'] = 'cookie';
-\$cfg['Servers'][\$i]['host'] = 'localhost';
-\$cfg['Servers'][\$i]['connect_type'] = 'tcp';
-\$cfg['Servers'][\$i]['compress'] = false;
-\$cfg['Servers'][\$i]['AllowNoPassword'] = false;
-\$cfg['UploadDir'] = '';
-\$cfg['SaveDir'] = '';
-\$cfg['PmaNoRelation_DisableWarning'] = true;
-\$cfg['VersionCheck'] = false;
-\$cfg['TempDir'] = '${DEFAULT_DIR_TOOL}/phpmyadmin/tmp';
-\$cfg['CaptchaLoginPublicKey'] = '';
-\$cfg['CaptchaLoginPrivateKey'] = '';
-\$cfg['ExecTimeLimit'] = 600;
-\$cfg['DefaultCharset'] = 'utf8';
-\$cfg['DefaultConnectionCollation'] = 'utf8_general_ci';
-EOCONFIGINC
-
     chown -R nginx:nginx "${DEFAULT_DIR_TOOL}"/phpmyadmin
-    chown -R nginx:nginx "${DEFAULT_DIR_TOOL}"/phpmyadmin
+    chmod 777 "${DEFAULT_DIR_TOOL}"/phpmyadmin/tmp
 
-    cat >> "/opt/phpmyadmin.temp" <<EOphpmyadmin_temp
-CREATE DATABASE IF NOT EXISTS phpmyadmin;
-FLUSH PRIVILEGES;
-EOphpmyadmin_temp
+    # Tạo database và import bảng cấu hình
+    mariadb -e "CREATE DATABASE IF NOT EXISTS phpmyadmin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+    wget https://github.com/phpmyadmin/phpmyadmin/raw/RELEASE_5_2_2/sql/create_tables.sql -O "${DEFAULT_DIR_TOOL}"/phpmyadmin/tmp/create_tables.sql
+    mariadb phpmyadmin < "${DEFAULT_DIR_TOOL}"/phpmyadmin/tmp/create_tables.sql
 
-    mariadb -u root -p"${sql_root_pass}" < /opt/phpmyadmin.temp
-    rm -f /opt/phpmyadmin.temp
+    # Tạo control user
+    mariadb -e "CREATE USER IF NOT EXISTS 'pma'@'localhost' IDENTIFIED BY 'pmapassword';"
+    mariadb -e "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'pma'@'localhost';"
 
-    curl -o phpmyadmin.sql "${EXT_LINK}"/phpmyadmin.sql
-    mariadb -u root -p"${sql_root_pass}" phpmyadmin < phpmyadmin.sql
-    rm -rf phpmyadmin.sql
+    # Tạo file config.inc.php
+    cp "${DEFAULT_DIR_TOOL}"/phpmyadmin/config.sample.inc.php "${DEFAULT_DIR_TOOL}"/phpmyadmin/config.inc.php
+    sed -i "s/\$cfg\['blowfish_secret'\] = '';/\$cfg['blowfish_secret'] = '$(openssl rand -base64 32)';/" "${DEFAULT_DIR_TOOL}"/phpmyadmin/config.inc.php
+
+    # Thêm cấu hình lưu trữ
+    cat <<EOF >> "${DEFAULT_DIR_TOOL}"/phpmyadmin/config.inc.php
+
+\$cfg['Servers'][1]['controluser'] = 'pma';
+\$cfg['Servers'][1]['controlpass'] = 'pmapassword';
+\$cfg['Servers'][1]['pmadb'] = 'phpmyadmin';
+\$cfg['Servers'][1]['bookmarktable'] = 'pma__bookmark';
+\$cfg['Servers'][1]['relation'] = 'pma__relation';
+\$cfg['Servers'][1]['table_info'] = 'pma__table_info';
+\$cfg['Servers'][1]['table_coords'] = 'pma__table_coords';
+\$cfg['Servers'][1]['pdf_pages'] = 'pma__pdf_pages';
+\$cfg['Servers'][1]['column_info'] = 'pma__column_info';
+\$cfg['Servers'][1]['history'] = 'pma__history';
+\$cfg['Servers'][1]['designer_coords'] = 'pma__designer_coords';
+EOF
 }
 
 ############################################
