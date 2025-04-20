@@ -551,8 +551,7 @@ EOphpmyadmin_temp
     mariadb -u root -p"${sql_root_pass}" < /opt/phpmyadmin.temp
     rm -f /opt/phpmyadmin.temp
 
-    //curl -o phpmyadmin.sql "${EXT_LINK}"/phpmyadmin.sql
-    curl -o phpmyadmin.sql https://raw.githubusercontent.com/phpmyadmin/phpmyadmin/refs/tags/RELEASE_5_2_2/sql/create_tables.sql
+    curl -o phpmyadmin.sql "${EXT_LINK}"/phpmyadmin.sql
     mariadb -u root -p"${sql_root_pass}" phpmyadmin < phpmyadmin.sql
     rm -rf phpmyadmin.sql
 }
