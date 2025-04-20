@@ -381,21 +381,22 @@ EOnginx_service
 }
 
 install_mariadb() {
-    apt-get install software-properties-common apt-transport-https -y
-#    apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' << EOF
-#
-#EOF
-#    add-apt-repository "deb [arch=amd64,arm64,ppc64el] https://sgp1.mirrors.digitalocean.com/mariadb/repo/${MARIADB_VERSION}/ubuntu $(lsb_release -cs) main" << EOF
-#
-#EOF
+    # Cài các gói cần thiết
+    apt-get install software-properties-common apt-transport-https wget ca-certificates -y
 
+    # Tải và kiểm tra mariadb_repo_setup
     wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
     echo "b7519209546e1656e5514c04b4dcffdd9b4123201bcd1875a361ad79eb943bbe mariadb_repo_setup" | sha256sum -c -
+
+    # Cấp quyền thực thi và chạy thiết lập repo
     chmod +x mariadb_repo_setup
     ./mariadb_repo_setup --mariadb-server-version="mariadb-${MARIADB_VERSION}"
+
+    # Cập nhật và cài đặt MariaDB
     apt-get update -y
     apt-get -y install mariadb-server mariadb-backup
 }
+
 
 install_php() {
     add-apt-repository ppa:ondrej/php <<EOF
