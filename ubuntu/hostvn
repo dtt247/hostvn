@@ -381,20 +381,19 @@ EOnginx_service
 }
 
 install_mariadb() {
-    # Cài các gói cần thiết
-    apt-get install software-properties-common apt-transport-https wget ca-certificates -y
+    apt-get update
+    apt-get install software-properties-common apt-transport-https wget ca-certificates gnupg lsb-release -y
 
-    # Tải và kiểm tra mariadb_repo_setup
     wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
     echo "b7519209546e1656e5514c04b4dcffdd9b4123201bcd1875a361ad79eb943bbe mariadb_repo_setup" | sha256sum -c -
-
-    # Cấp quyền thực thi và chạy thiết lập repo
     chmod +x mariadb_repo_setup
     ./mariadb_repo_setup --mariadb-server-version="mariadb-${MARIADB_VERSION}"
 
-    # Cập nhật và cài đặt MariaDB
-    apt-get update -y
-    apt-get -y install mariadb-server mariadb-backup
+    apt-get update
+    apt-get install mariadb-server mariadb-backup -y
+
+    systemctl enable mariadb
+    systemctl start mariadb
 }
 
 
@@ -552,7 +551,8 @@ EOphpmyadmin_temp
     mariadb -u root -p"${sql_root_pass}" < /opt/phpmyadmin.temp
     rm -f /opt/phpmyadmin.temp
 
-    curl -o phpmyadmin.sql "${EXT_LINK}"/phpmyadmin.sql
+    //curl -o phpmyadmin.sql "${EXT_LINK}"/phpmyadmin.sql
+    curl -o phpmyadmin.sql https://raw.githubusercontent.com/phpmyadmin/phpmyadmin/refs/tags/RELEASE_5_2_2/sql/create_tables.sql
     mariadb -u root -p"${sql_root_pass}" phpmyadmin < phpmyadmin.sql
     rm -rf phpmyadmin.sql
 }
