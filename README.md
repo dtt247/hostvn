@@ -6,7 +6,7 @@
 
 <p align="center"> <img src="https://blog.hostvn.net/wp-content/uploads/2020/07/logo-big-2.png" /> </p>
 
-########################################################################################
+########################################################################
 
 Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (20.04, 22.04, 24.04).
 
@@ -19,7 +19,9 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 
 ## 2. Cách cài đặt
 
-`curl -sO https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/install && chmod +x install && ./install`
+```shell
+curl -sO https://raw.githubusercontent.com/lythanhphuc/hostvn-script/master/install && chmod +x install && ./install
+```
 
 ## 3. Chi tiết Script:
 
