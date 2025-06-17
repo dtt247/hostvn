@@ -3189,8 +3189,8 @@ END
 add_menu() {
     cd_dir "${BASH_DIR}"
     rm -rf menu hostvn.conf ipaddress menu.tar.gz /usr/bin/hostvn
-    wget "${EXT_LINK}"/ubuntu/menu.tar.gz  > /dev/null
-    tar -xvf menu.tar.gz && rm -rf menu.tar.gz  > /dev/null
+    wget "${EXT_LINK}"/ubuntu/menu.tar  > /dev/null
+    tar -xvf menu.tar && rm -rf menu.tar  > /dev/null
     mkdir -p "${BASH_DIR}"/users
     mkdir -p /var/log/hostvn
     mkdir -p /var/hostvn/wpcron
