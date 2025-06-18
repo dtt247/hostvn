@@ -1,4 +1,4 @@
-<p align="center"><strong>Auto Install & Optimize LEMP Stack on Ubuntu (20.04, 22.04, 24.04)</strong></p>
+<p align="center"><strong>Auto Install & Optimize LEMP Stack on Ubuntu (22.04, 24.04)</strong></p>
 <p align="center"><strong>Author: Sanvv - HOSTVN.NET Technical</strong></p>
 <p align="center"><strong>Home Page: <a href="https://hostvn.vn/">Hostvn Scripts Home page</a> , <a href="https://hostvn.net">Hostvn.net - Tên miền, Web Hosting, Email, VPS &amp; Dịch vụ lưu trữ Website</a></strong></p>
 <p align="center"><strong>Document: https://help.hostvn.vn/</strong></p>
@@ -15,7 +15,7 @@ Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - 
 ## 1. Yêu cầu
 
 - VPS tối thiểu 512MB ram và chưa cài đặt bất kỳ dịch vụ nào.
-- Ubuntu 20.04, 22.04, 24.04.
+- Ubuntu 22.04, 24.04.
 
 ## 2. Cách cài đặt
 
@@ -29,9 +29,9 @@ curl -sO https://raw.githubusercontent.com/dtt247/hostvn/master/install && chmod
 
 - Cập nhật liên tục, cung cấp Menu giúp dễ dàng thao tác, tự động cài đặt.
 - Cài đặt các phần mềm với phiên bản mới nhất từ chính trang chủ.
-- Mariadb: 10.5.
-- Phiên bản Nginx Stable.
-- Cho phép lựa chọn phiên bản PHP: 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
+- Mariadb: 11.8
+- Phiên bản Nginx Stable 1.26.3.
+- Cho phép lựa chọn phiên bản PHP: 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3
 - phpMyAdmin 4.9.x nếu cài đặt PHP mặc định là 5.6, phpMyAdmin 5.0.x nếu cài đặt PHP mặc định là 7.x.
 - Cấu hình Nginx FastCGI cache
 - Cấu hình Nginx Pagespeed
