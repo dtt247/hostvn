@@ -8,7 +8,7 @@
 
 ########################################################################
 
-Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (20.04, 22.04, 24.04).
+Script được viết bằng shell dùng để cài đặt LEMP Stack (Nginx - MariaDB - PHP-FPM) trên Ubuntu (22.04, 24.04).
 
 <b>Vui lòng không sao chép, phát hành lại với mục đích thương mại, donate. Xin cảm ơn.</b>
 
@@ -31,7 +31,7 @@ curl -sO https://raw.githubusercontent.com/dtt247/hostvn/master/install && chmod
 - Cài đặt các phần mềm với phiên bản mới nhất từ chính trang chủ.
 - Mariadb: 11.8
 - Phiên bản Nginx Stable 1.26.3.
-- Cho phép lựa chọn phiên bản PHP: 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3
+- Cho phép lựa chọn phiên bản PHP: 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4
 - phpMyAdmin 4.9.x nếu cài đặt PHP mặc định là 5.6, phpMyAdmin 5.0.x nếu cài đặt PHP mặc định là 7.x.
 - Cấu hình Nginx FastCGI cache
 - Cấu hình Nginx Pagespeed
