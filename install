@@ -71,17 +71,19 @@ EOsource_list
     fi
 	if [[ "$OS" == 'ubuntu' && "${OS_VER}" == "22.04" ]]; then
 		mv /etc/apt/sources.list /etc/apt/sources.list."$(date +%Y-%m-%d)"
-		cat >> "/etc/apt/sources.list" << EOsource_list
-deb http://archive.ubuntu.com/ubuntu/ jammy main restricted
-deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
-deb http://archive.ubuntu.com/ubuntu/ jammy universe
-deb http://archive.ubuntu.com/ubuntu/ jammy-updates universe
-deb http://archive.ubuntu.com/ubuntu/ jammy multiverse
-deb http://archive.ubuntu.com/ubuntu/ jammy-updates multiverse
-deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
-deb http://security.ubuntu.com/ubuntu jammy-security main restricted
-deb http://security.ubuntu.com/ubuntu jammy-security universe
-deb http://security.ubuntu.com/ubuntu jammy-security multiverse
+		if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
+cat >> "/etc/apt/sources.list" << EOsource_list
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy main restricted universe multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy-updates main restricted universe multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy-backports main restricted universe multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy-security main restricted universe multiverse
+EOsource_list
+        else
+cat >> "/etc/apt/sources.list" << EOsource_list
+deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu jammy-security main restricted universe multiverse
 EOsource_list
 
     apt update -y
